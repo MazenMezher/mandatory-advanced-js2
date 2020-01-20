@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from "axios"
 import { Link } from 'react-router-dom';
-
+import { Helmet } from "react-helmet";
 
 class Details extends Component {
     constructor(props) {
@@ -14,6 +14,7 @@ class Details extends Component {
             rating: "",
             description: "",
             id: props.id,
+            error: false,
         }
     }
 
@@ -33,14 +34,25 @@ class Details extends Component {
             this.setState({movie: movie})
             
         })
+        .catch(() => {
+            this.setState({
+                error: true,
+            })
+        })
     }
     
     
     render() {
         const {movie} = this.state;
-
+        const {error} = this.state
+        if(error){
+            return <p>Server error please return to working page</p>
+        }
         return (
             <div>
+                 <Helmet > 
+                    <title >Details Page</title>
+                </Helmet>
                 <table>
                     <thead>
                     <tr>

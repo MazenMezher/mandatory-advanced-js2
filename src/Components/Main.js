@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from "axios"
 import {Link} from "react-router-dom"
+import { Helmet } from "react-helmet";
+
 
 class Main extends Component {
 
@@ -9,7 +11,7 @@ class Main extends Component {
     
         this.state = {
              movies: [],
-
+             error: false,
         }
     }
     
@@ -19,14 +21,33 @@ class Main extends Component {
         .then(res => {
             let data = res.data;
             this.setState({movies: data})
-            console.log(res)
+        })
+        .catch(() => {
+            this.setState({
+                error: true,
+            })
         })
     }
 
+    deleteMovie = (id) => {
+        axios.delete(`http://3.120.96.16:3001/movies/${id}`)
+        
+    }
+    
+
+
     render() {
         const { movies} = this.state
+        const {error} = this.state
+        if(error){
+            return <p>Server error please return to working page</p>
+        }
         return (
             <div>
+                 <Helmet > 
+                    <title >Main Page</title>
+                </Helmet>
+                <input type="text" />
                 <table>
                     <thead>
                         <tr>
@@ -51,7 +72,7 @@ class Main extends Component {
                             <p>Details</p>
                         </Link>
 
-                        <button>Delete</button>
+                        <button onClick={() => this.deleteMovie(data.id)}>Delete</button>
                         </td>
 
                         

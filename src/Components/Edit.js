@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import axios from "axios"
 import { Link } from 'react-router-dom';
-
+import { Helmet } from "react-helmet";
 
 
  class Edit extends Component {
      constructor(props) {
          super(props)
-     
+
          this.state = {
               movie: [],
               title: "",
@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
               rating: "",
               description: "",
               id: props.id,
+              error: false,
          }
      }
      
@@ -69,29 +70,38 @@ import { Link } from 'react-router-dom';
             .then(res => {
                 console.log(res)
             })
+            .catch( ()=> {
+                this.setState({error: true})
+            })
         }
     render() {
         const {movie} = this.state
-        
+        const {error} = this.state
+        if(error){
+            return <p>Server error please return to working page</p>
+        }
         return (
             
             <div>
-                <form >
-                   
+                <Helmet > 
+                    <title >Edit Page</title>
+                </Helmet>
+                
+                <form>
                     {movie.map(data => {
                         return (
                             <div key={data.id}>
                             <p>Title</p>
-                            <input  type="text" value={this.state.title} onChange={this.titleChange.bind(this)}/>
+                            <input  type="text" value={this.state.title} minLength="1" maxLength="40" onChange={this.titleChange.bind(this)}/>
 
                             <p>Director</p>
-                            <input type="text" value={this.state.director} onChange={this.directorChange.bind(this)}/>
+                            <input type="text" value={this.state.director} minLength="1" maxLength="40" onChange={this.directorChange.bind(this)}/>
 
                             <p>Rating</p>
                             <input type="range" min="0.0" max="5.0" value={this.state.rating} onChange={this.ratingChange.bind(this)}/>
 
                             <p>Description</p>
-                            <textarea type="text" value={this.state.description} onChange={this.descriptionChange.bind(this)} ></textarea>
+                            <textarea type="text" value={this.state.description} minLength="1" maxLength="300" onChange={this.descriptionChange.bind(this)} ></textarea>
 
                             <button onClick={this.updateChanged.bind(this)}>updateChanges</button>
                             </div>
