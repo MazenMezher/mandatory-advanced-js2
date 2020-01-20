@@ -12,6 +12,7 @@ class Main extends Component {
         this.state = {
              movies: [],
              error: false,
+             search: "",
         }
     }
     
@@ -34,7 +35,11 @@ class Main extends Component {
         
     }
     
-
+    searchEng = (e) => {
+        this.setState({
+            search: e.target.value,
+        })
+    }
 
     render() {
         const { movies} = this.state
@@ -47,7 +52,7 @@ class Main extends Component {
                  <Helmet > 
                     <title >Main Page</title>
                 </Helmet>
-                <input type="text" />
+                <input type="text" placeholder="Search" onChange={this.searchEng.bind(this)}/>
                 <table>
                     <thead>
                         <tr>
@@ -57,7 +62,17 @@ class Main extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {movies.map(data => {
+                    {movies.filter(results => {
+                        if(!this.state.search){
+                            return results
+                        } else {
+                            if(results.title.toLowerCase().indexOf(this.state.search) === -1 && results.director.toLowerCase().indexOf(this.state.search) === -1){
+                                return false
+                            } else {
+                                return true
+                            }
+                        }
+                    }).map(data => {
                     return <tr key={data.id}>
                         <td>{data.title}</td>
                         <td>{data.director}</td>
