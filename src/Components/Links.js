@@ -5,10 +5,10 @@ import {Link} from "react-router-dom"
  class Links extends Component {
     render() {
         return (
-            <div>
+            <div className="TopNav">
 
                 <Link to="/">
-                    <p>Main</p>
+                    <p className="Ptest">Main</p>
                 </Link>
 
                 <Link to="/add">

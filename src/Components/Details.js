@@ -29,7 +29,9 @@ class Details extends Component {
             this.setState({rating: res.data.rating})
             this.setState({description: res.data.description})
 
+            
             let movie = this.state.movie;
+            console.log(movie)
             movie.push(res.data);
             this.setState({movie: movie})
             
@@ -50,10 +52,10 @@ class Details extends Component {
         }
         return (
             <div>
-                 <Helmet > 
+                <Helmet > 
                     <title >Details Page</title>
                 </Helmet>
-                <table>
+                <table width="100%">
                     <thead>
                     <tr>
                             <th>Title</th>
@@ -71,7 +73,6 @@ class Details extends Component {
                         <td>{data.description}</td>
                         <td>{data.director}</td>
                         <td>{data.rating}</td>
-
                         <td>
                         <Link to={"/edit/" + data.id}>
                             <p>Edit</p>

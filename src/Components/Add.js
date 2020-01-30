@@ -10,7 +10,7 @@ import { Helmet } from "react-helmet";
         super(props)
     
         this.state = {
-            movie: [],
+            
             title: "",
             director: "",
             rating: "0",
@@ -26,6 +26,7 @@ import { Helmet } from "react-helmet";
 
     setDirector = (e) => {
         this.setState({director: e.target.value})
+        
     }
 
    setRating = (e) => {
@@ -41,10 +42,10 @@ import { Helmet } from "react-helmet";
 
         let data = {
         
-          "title": this.state.title,
-          "director": this.state.director,
-          "rating": this.state.rating,
-          "description": this.state.description,
+          title: this.state.title,
+          director: this.state.director,
+          rating: this.state.rating,
+          description: this.state.description,
         }
 
         axios.post(`http://3.120.96.16:3001/movies`, data)
@@ -70,7 +71,7 @@ import { Helmet } from "react-helmet";
         }
         return (
             <div>
-                 <Helmet > 
+                <Helmet > 
                     <title >Add Page</title>
                 </Helmet>
                 
@@ -81,8 +82,8 @@ import { Helmet } from "react-helmet";
 
                     <p>Description</p><textarea minLength="1" maxLength="300" type="text" value={this.state.description} onChange={this.setDescription.bind(this)}/>
 
-                    <p>Rating</p><input type="range" min="0.0" max="5.0" value={this.state.rating} onChange={this.setRating.bind(this)}/>
-
+                    <p>Rating</p><input type="range" min="0.0" max="5.0" step="0.1" value={this.state.rating} onChange={this.setRating.bind(this)}/>
+                    <p>{this.state.rating}</p> 
                     <br/>
                     <button type="submit" onClick={this.addMovie.bind(this)}>Submit new movie</button>
                 </form>

@@ -48,12 +48,12 @@ class Main extends Component {
             return <p>Server error please return to working page</p>
         }
         return (
-            <div>
+            <div className="MainBackground">
                  <Helmet > 
                     <title >Main Page</title>
                 </Helmet>
-                <input type="text" placeholder="Search" onChange={this.searchEng.bind(this)}/>
-                <table>
+                <input className="SearchArea" type="text" placeholder="Search" onChange={this.searchEng.bind(this)}/>
+                <table className="MainTable">
                     <thead>
                         <tr>
                             <th>Title</th>
@@ -76,7 +76,7 @@ class Main extends Component {
                     return <tr key={data.id}>
                         <td>{data.title}</td>
                         <td>{data.director}</td>
-                        <td>{data.rating}</td>
+                        <td className="Rating">{data.rating}</td>
 
                         <td>
                         <Link to={"/edit/" + data.id}>
@@ -87,7 +87,7 @@ class Main extends Component {
                             <p>Details</p>
                         </Link>
 
-                        <button onClick={() => this.deleteMovie(data.id)}>Delete</button>
+                        <button className="DeleteButton" onClick={() => this.deleteMovie(data.id)}>Delete</button>
                         </td>
 
                         
