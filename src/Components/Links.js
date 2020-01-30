@@ -8,11 +8,11 @@ import {Link} from "react-router-dom"
             <div className="TopNav">
 
                 <Link to="/">
-                    <p className="Ptest">Main</p>
+                    <p style={{color: "white"}}>Main</p>
                 </Link>
 
                 <Link to="/add">
-                    <p>Add</p>
+                    <p style={{color: "white"}}>Add</p>
                 </Link>
             </div>
         )

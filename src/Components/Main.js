@@ -80,11 +80,11 @@ class Main extends Component {
 
                         <td>
                         <Link to={"/edit/" + data.id}>
-                            <p>Edit</p>
+                            <p style={{color: "white"}}>Edit</p>
                         </Link>
 
                         <Link to={"/details/" + data.id}>
-                            <p>Details</p>
+                            <p style={{color: "white"}}>Details</p>
                         </Link>
 
                         <button className="DeleteButton" onClick={() => this.deleteMovie(data.id)}>Delete</button>
