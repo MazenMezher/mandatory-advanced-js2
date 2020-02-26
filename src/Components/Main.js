@@ -32,7 +32,11 @@ class Main extends Component {
 
     deleteMovie = (id) => {
         axios.delete(`http://3.120.96.16:3001/movies/${id}`)
-        
+        .then(() => {
+            this.setState({
+                movies: this.state.movies.filter(m => m.id !== id)
+            })
+        }) 
     }
     
     searchEng = (e) => {
